@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aceitas?</title>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/romantic');
+        body {
+            margin: 0;
+            height: 100vh;
+            display: grid;
+            place-content: center;
+            background: pink;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .picture {
+            --s: 10px;
+            padding: var(--s);
+            border: calc(2 * var(--s)) solid #0000;
+            outline: 1px solid #000;
+            outline-offset: calc(-1 * var(--s));
+            background: conic-gradient(from 90deg at 1px 1px, #0000 25%, #000 0);
+        }
+
+        .title {
+            font-family: Romantic, sans-serif;
+            font-weight: 400;
+            font-size: 35px;
+            text-align: center;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-family: Romantic, sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            color: #fff;
+            transition: top 0.3s ease-out, left 0.3s ease-out;
+        }
+
+        .button-yes {
+            background-color: #b3d1ff;
+            border-radius: 50%;
+        }
+
+        .button-no {
+            background-color: #ff93af;
+            border-radius: 50%;
+        }
+
+        .container:hover .button-no {
+            animation: moveButton 1s infinite;
+        }
+
+        @keyframes moveButton {
+            0%, 100% {
+                top: 0;
+                left: 0;
+            }
+            25% {
+                top: 0;
+                left: 100%;
+            }
+            50% {
+                top: 100%;
+                left: 100%;
+            }
+            75% {
+                top: 100%;
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="picture">
+            <img src="our picture.jpg" alt="Your Picture" style="width: 300px;">
+        </div>
+        <div>
+            <h1 class="title">Nick, quer namorar comigo?</h1>
+            <div class="buttons">
+                <button class="button button-yes" onclick="accept()">Sim</button>
+                <button class="button button-no" id="button-no">Não</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function accept() {
+            alert('OMG Finally! Let’s fucking gooo!');
+        }
+
+        const buttonNo = document.getElementById('button-no');
+        buttonNo.addEventListener('mouseenter', moveButton);
+
+        function moveButton() {
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            const buttonRect = buttonNo.getBoundingClientRect();
+            const maxLeft = containerRect.width - buttonRect.width;
+            const maxTop = containerRect.height - buttonRect.height;
+
+            const newLeft = Math.floor(Math.random() * maxLeft);
+            const newTop = Math.floor(Math.random() * maxTop);
+
+            buttonNo.style.left = `${newLeft}px`;
+            buttonNo.style.top = `${newTop}px`;
+        }
+    </script>
+</body>
+</html>
